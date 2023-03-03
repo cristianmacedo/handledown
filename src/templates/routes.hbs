@@ -1,0 +1,147 @@
+<h1>{{title}}</h1>
+
+<h2>Rotas</h2>
+
+{{#each routes}}
+
+<h2>{{this.title}}</h2>
+<p>{{this.description}}</p>
+
+<h3><b>URL:</b> {{this.path}}</h3>
+<h3><b>Metodo:</b> {{this.method}}</h3>
+
+{{#if this.headers}}
+
+<h3><b>URL Params</b></h3>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Example</th>
+      <th>Rule</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each this.headers}}
+      <tr>
+        <td>{{this.name}}</td>
+        <td>{{this.type}}</td>
+        <td>{{this.example}}</td>
+        <td>{{this.rule}}</td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>
+{{/if}}
+
+{{#if this.urlParams}}
+
+<h3><b>URL Params</b></h3>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Example</th>
+      <th>Rule</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each this.urlParams}}
+      <tr>
+        <td>{{this.name}}</td>
+        <td>{{this.type}}</td>
+        <td>{{this.example}}</td>
+        <td>{{this.rule}}</td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>
+{{/if}}
+
+{{#if this.bodyParams}}
+
+<h3><b>Body Params</b></h3>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Example</th>
+      <th>Rule</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each this.bodyParams}}
+      <tr>
+        <td>{{this.name}}</td>
+        <td>{{this.type}}</td>
+        <td>{{this.example}}</td>
+        <td>{{this.rule}}</td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>
+{{/if}}
+
+<h3><b>Success Responses</b></h3>
+<table>
+  <thead>
+    <tr>
+      <th>Code</th>
+      <th>Content</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each this.successResponses}}
+      <tr>
+        <td>{{this.code}}</td>
+        <td>
+          {{#if this.content}}
+          <pre>{{this.content}}</pre>
+          {{else}}
+          None
+          {{/if}}
+        </td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>
+
+<h3><b>Error Responses</b></h3>
+<table>
+  <thead>
+    <tr>
+      <th>Code</th>
+      <th>Reason</th>
+      <th>Content</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each this.errorResponses}}
+      <tr>
+        <td>{{this.code}}</td>
+        <td>{{this.reason}}</td>
+        <td><pre>{{this.content}}</pre></td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>
+
+<h3><b>Sample Call</b></h3>
+<pre>
+bash curl
+-X {{this.method}} {{this.path}}?{{paramify (normalize this.urlParams)}}
+{{#each this.headers}}
+-H "{{this.name}}: {{this.example}}"
+{{/each}}
+-d '{{ stringify (normalize this.bodyParams) }}'
+</pre>
+
+<h3><b>Notes</b></h3>
+<p>{{this.notes}}</p>
+
+---
+
+{{/each}}
