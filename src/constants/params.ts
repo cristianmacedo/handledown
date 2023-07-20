@@ -36,7 +36,7 @@ export const paramEmail = {
 export const paramPassword = {
   name: "password",
   type: "string",
-  example: "St0ller@123",
+  example: "Minh4S3nha@123",
   rule: "8 digitos, 1 letra maiúscula, 1 número, 1 caractére especial",
 };
 
@@ -79,4 +79,11 @@ export const paramSalesChannelRegistration = {
   example: "34012072000170",
   type: "string",
   rule: "CNPJ ou CPF válido que coincide com um cadastro de Canal de Vendas",
+};
+
+export const paramName = {
+  name: "name",
+  example: "John Doe",
+  type: "string",
+  rule: "Apenas letras, letras com acentos, espaços e caractéres especiais específicos (`-)",
 };

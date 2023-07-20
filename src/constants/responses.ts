@@ -15,6 +15,12 @@ export const successResponseResourceUpdated = {
 
 // Error
 
+export const errorResponseEmailOrPasswordWrong = {
+  code: "401",
+  reason: "O email ou senha estão errados",
+  content: "{ error: 'email-or-password-wrong' }",
+};
+
 export const errorResponseEmailAlreadyRegistered = {
   code: "409",
   reason: "O endereço de e-mail especificado já está cadastrado",

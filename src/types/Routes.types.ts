@@ -10,6 +10,7 @@ export interface Param {
 export interface Response {
   code: string;
   content: string | null;
+  json?: boolean;
   reason?: string;
 }
 

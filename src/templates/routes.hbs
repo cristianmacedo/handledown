@@ -99,7 +99,11 @@
         <td>{{this.code}}</td>
         <td>
           {{#if this.content}}
-          <pre>{{{this.content}}}</pre>
+            {{#if this.json}}
+              <pre>{{{stringify (parse this.content)}}}</pre>
+            {{else}}
+              <pre>{{{this.content}}}</pre>
+            {{/if}}
           {{else}}
           None
           {{/if}}
@@ -123,7 +127,11 @@
       <tr>
         <td>{{this.code}}</td>
         <td>{{this.reason}}</td>
-        <td><pre>{{{this.content}}}</pre></td>
+        {{#if this.json}}
+          <td><pre>{{{stringify (parse this.content)}}}</pre></td>
+        {{else}}
+          <td><pre>{{{this.content}}}</pre></td>
+        {{/if}}
       </tr>
     {{/each}}
   </tbody>

@@ -1,8 +1,5 @@
 import { ocUser } from "../../constants/entities";
-import {
-  paramSalesChannelRegistrations,
-  paramStatus,
-} from "../../constants/params";
+
 import {
   paramAuthorization,
   paramEmail,
@@ -11,7 +8,11 @@ import {
   paramPassword,
   paramPhone,
   paramSearch,
+  paramSalesChannelRegistrations,
+  paramStatus,
+  paramName,
 } from "../../constants/params";
+
 import {
   errorResponseEmailAlreadyRegistered,
   errorResponseInvalidAuthorization,
@@ -24,13 +25,6 @@ import {
   successResponseResourceUpdated,
 } from "../../constants/responses";
 import { RoutesData } from "../../types/Routes.types";
-
-const userParamName = {
-  name: "name",
-  example: "John Doe",
-  type: "string",
-  rule: "Apenas letras",
-};
 
 const userParamMobilePhone = {
   ...paramPhone,
@@ -53,7 +47,7 @@ const usersData: RoutesData = {
       headers: [],
       urlParams: [],
       bodyParams: [
-        userParamName,
+        paramName,
         paramEmail,
         paramPassword,
         userParamMobilePhone,
@@ -151,7 +145,7 @@ const usersData: RoutesData = {
           type: "string (UserType)",
           rule: "Apenas usuários do tipo `stoller-admin` ou `sales-channel-admin` admin podem atualizar status de usuários.",
         },
-        userParamName,
+        paramName,
         {
           ...paramPassword,
           name: "newPassword",

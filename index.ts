@@ -60,8 +60,9 @@ const getRenderMap = async (): Promise<RenderMap> => {
 Handlebars.registerHelper("urlParamReplacer", (object: string) =>
   object.replace(":id", "64754924c65a35658944aba3")
 );
+Handlebars.registerHelper("parse", (object: string) => JSON.parse(object));
 Handlebars.registerHelper("stringify", (object: any) =>
-  JSON.stringify(object, undefined, 2)
+  JSON.stringify(object, null, 2)
 );
 Handlebars.registerHelper("paramify", (object: any) =>
   new URLSearchParams(object).toString()
