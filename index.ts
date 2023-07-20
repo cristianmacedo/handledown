@@ -57,7 +57,12 @@ const getRenderMap = async (): Promise<RenderMap> => {
   return renderMap;
 };
 
-Handlebars.registerHelper("stringify", JSON.stringify);
+Handlebars.registerHelper("urlParamReplacer", (object: string) =>
+  object.replace(":id", "64754924c65a35658944aba3")
+);
+Handlebars.registerHelper("stringify", (object: any) =>
+  JSON.stringify(object, undefined, 2)
+);
 Handlebars.registerHelper("paramify", (object: any) =>
   new URLSearchParams(object).toString()
 );

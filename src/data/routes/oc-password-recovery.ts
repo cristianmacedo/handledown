@@ -1,10 +1,8 @@
+import { paramEmail, paramPassword } from "../../constants/params";
 import {
   successResponseDefault,
-  errorResponseEmailNotFound,
   errorResponseInvalidFieldFormat,
-  paramEmail,
-  paramPassword,
-} from "../../constants/routes";
+} from "../../constants/responses";
 import { RoutesData } from "../../types/Routes.types";
 
 const routePasswordRecoveryData: RoutesData = {
@@ -19,9 +17,9 @@ const routePasswordRecoveryData: RoutesData = {
       urlParams: [],
       bodyParams: [paramEmail],
       successResponses: [successResponseDefault],
-      errorResponses: [errorResponseEmailNotFound],
+      errorResponses: [],
       notes:
-        "The outcome of this route should be an email message with an URL including the Password Recovery Token, which is a JWT token that should be valid for 10 minutes. The token is NOT stored server-side and should contain the encoded email address of the account which the password will be reseted.",
+        "O resultado dessa rota deve ser uma mensagem de e-mail com uma URL incluíndo o token de redefinição de senha, que deve ser válido por 10 minutos. Esse token não deve ser armazenado no servidor e deve conter o endereço de e-mail do usuário que solicitou a redefinição de senha.",
     },
     {
       title: "Redefinição de senha",
@@ -40,7 +38,7 @@ const routePasswordRecoveryData: RoutesData = {
           name: "passwordResetToken",
           type: "string",
           example: "d9f478221ab718e758a7c9bb603d5yx9",
-          rule: "JWT Token with encoded email address of the account to be reseted",
+          rule: "Token JWT com o endereço de e-mail do usuário que solicitou a redefinição de senha.",
         },
       ],
       successResponses: [successResponseDefault],
@@ -48,16 +46,17 @@ const routePasswordRecoveryData: RoutesData = {
         errorResponseInvalidFieldFormat,
         {
           code: "401",
-          reason: "Missing password reset token",
+          reason: "Token de redefinição de senha ausente",
           content: "{ error: 'password-reset-token-missing' }",
         },
         {
           code: "401",
-          reason: "Provided password reset token is invalid",
+          reason: "Token de redefinição de senha inválido",
           content: "{ error: 'password-reset-token-invalid' }",
         },
       ],
-      notes: "Token should be validated and user password updated as provided.",
+      notes:
+        "O token deve ser válidado e a senha do usuário atualizada de acordo.",
     },
   ],
 };

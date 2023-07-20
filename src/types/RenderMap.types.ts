@@ -1,6 +1,8 @@
+import Handlebars from "handlebars";
+
 export type RenderMapItem = {
   name: string;
-  template: HandlebarsTemplateDelegate<any>;
+  template: Handlebars.TemplateDelegate<any>;
   dataList: any[];
 };
 

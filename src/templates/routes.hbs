@@ -27,8 +27,8 @@
       <tr>
         <td>{{this.name}}</td>
         <td>{{this.type}}</td>
-        <td>{{this.example}}</td>
-        <td>{{this.rule}}</td>
+        <td><code>{{this.example}}</code></td>
+        <td>{{{this.rule}}}</td>
       </tr>
     {{/each}}
   </tbody>
@@ -52,8 +52,8 @@
       <tr>
         <td>{{this.name}}</td>
         <td>{{this.type}}</td>
-        <td>{{this.example}}</td>
-        <td>{{this.rule}}</td>
+        <td><code>{{this.example}}</code></td>
+        <td>{{{this.rule}}}</td>
       </tr>
     {{/each}}
   </tbody>
@@ -77,8 +77,8 @@
       <tr>
         <td>{{this.name}}</td>
         <td>{{this.type}}</td>
-        <td>{{this.example}}</td>
-        <td>{{this.rule}}</td>
+        <td><code>{{this.example}}</code></td>
+        <td>{{{this.rule}}}</td>
       </tr>
     {{/each}}
   </tbody>
@@ -99,7 +99,7 @@
         <td>{{this.code}}</td>
         <td>
           {{#if this.content}}
-          <pre>{{this.content}}</pre>
+          <pre>{{{this.content}}}</pre>
           {{else}}
           None
           {{/if}}
@@ -123,24 +123,24 @@
       <tr>
         <td>{{this.code}}</td>
         <td>{{this.reason}}</td>
-        <td><pre>{{this.content}}</pre></td>
+        <td><pre>{{{this.content}}}</pre></td>
       </tr>
     {{/each}}
   </tbody>
 </table>
 
 <h3><b>Sample Call</b></h3>
-<pre>
-bash curl
--X {{this.method}} {{this.path}}?{{paramify (normalize this.urlParams)}}
+<pre lang="bash">
+curl
+-X {{this.method}} {{urlParamReplacer this.path}}?{{paramify (normalize this.urlParams)}}
 {{#each this.headers}}
 -H "{{this.name}}: {{this.example}}"
 {{/each}}
--d '{{ stringify (normalize this.bodyParams) }}'
+-d '{{{ stringify (normalize this.bodyParams) }}}'
 </pre>
 
 <h3><b>Notes</b></h3>
-<p>{{this.notes}}</p>
+<p>{{{this.notes}}}</p>
 
 ---
 

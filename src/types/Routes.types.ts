@@ -17,7 +17,7 @@ export interface Route {
   title: string;
   description: string;
   path: string;
-  method: "GET" | "POST" | "DELETE";
+  method: "GET" | "POST" | "DELETE" | "PUT";
   headers: Param[];
   urlParams: Param[];
   bodyParams: Param[];

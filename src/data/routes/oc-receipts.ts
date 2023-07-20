@@ -1,26 +1,19 @@
 import {
+  paramAuthorization,
+  paramLimit,
+  paramOffset,
+  paramProduct,
+  paramSalesChannel,
+  paramSearch,
+  paramStatus,
+} from "../../constants/params";
+import {
   errorResponseInvalidAuthorization,
   errorResponseMissingAuthorization,
-  paramAuthorization,
-} from "../../constants/routes";
+  errorResponseResourceForbidden,
+  errorResponseResourceNotFound,
+} from "../../constants/responses";
 import { RoutesData } from "../../types/Routes.types";
-
-const paramItemsRelation = {
-  name: "itemsRelation",
-  type: "string",
-  example: "true",
-  rule: "Returns each receipt with receipt items populated",
-};
-
-const paramTrackingRelation = {
-  name: "trackingRelation",
-  type: "string",
-  example: "true",
-  rule: "Returns the tracking properties if the transporter info exists on our database",
-};
-
-const receiptsNotes =
-  "Items or tracking info should NOT be populated by default.";
 
 const receiptsData: RoutesData = {
   title: "Notas fiscais",
@@ -31,7 +24,18 @@ const receiptsData: RoutesData = {
       path: "/api/receipts",
       method: "GET",
       headers: [paramAuthorization],
-      urlParams: [paramItemsRelation, paramTrackingRelation],
+      urlParams: [
+        paramLimit,
+        paramOffset,
+        {
+          ...paramSearch,
+          example: "OPT-00001234",
+          rule: "Filtrar apenas itens que contenham parte da pesquisa no nome do Pedido-Mãe ou no numero da NF",
+        },
+        paramProduct,
+        paramSalesChannel,
+        paramStatus,
+      ],
       bodyParams: [],
       successResponses: [
         {
@@ -42,8 +46,9 @@ const receiptsData: RoutesData = {
       errorResponses: [
         errorResponseMissingAuthorization,
         errorResponseInvalidAuthorization,
+        errorResponseResourceForbidden,
       ],
-      notes: receiptsNotes,
+      notes: "",
     },
     {
       title: "Nota Fiscal",
@@ -51,7 +56,7 @@ const receiptsData: RoutesData = {
       path: "/api/receipts/:id",
       method: "GET",
       headers: [paramAuthorization],
-      urlParams: [paramItemsRelation, paramTrackingRelation],
+      urlParams: [],
       bodyParams: [],
       successResponses: [
         {
@@ -62,8 +67,10 @@ const receiptsData: RoutesData = {
       errorResponses: [
         errorResponseMissingAuthorization,
         errorResponseInvalidAuthorization,
+        errorResponseResourceForbidden,
+        errorResponseResourceNotFound,
       ],
-      notes: receiptsNotes,
+      notes: "",
     },
   ],
 };
